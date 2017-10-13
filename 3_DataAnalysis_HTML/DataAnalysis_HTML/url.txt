@@ -1,0 +1,4 @@
+http://www.investing.com/currencies/gbp-usd-historical-data
+http://www.investing.com/commodities/gold-historical-data
+(download directly using the browser to the get the complete data in the selected period)
+
