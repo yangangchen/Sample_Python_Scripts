@@ -1,3 +1,7 @@
+# NeuralNetworks.py
+# 
+# Author: Yangang Chen, based on the TensorFlow library
+#
 # Copyright 2015 The TensorFlow Authors. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +17,7 @@
 # limitations under the License.
 # ==============================================================================
 
-"""A deep MNIST classifier using convolutional layers.
-See extensive documentation at
-https://www.tensorflow.org/get_started/mnist/pros
+"""A deep image classifier using convolutional layers.
 """
 # Disable linter warnings to maintain consistency with tutorial.
 # pylint: disable=invalid-name
@@ -138,13 +140,14 @@ class DataSet(object):
 def deepnn(x, info):
     """deepnn builds the graph for a deep net for classifying digits.
     Args:
-      x: an input tensor with the dimensions (N_examples, 784), where 784 is the
-      number of pixels in a standard MNIST image.
+      x: an input tensor with the dimensions (N_examples, info['total_pixels']), 
+      where info['total_pixels'] = info['height'] * info['width'] * info['channel']
+      is the total number of pixels in each image.
     Returns:
-      A tuple (y, keep_prob). y is a tensor of shape (N_examples, 10), with values
-      equal to the logits of classifying the digit into one of 10 classes (the
-      digits 0-9). keep_prob is a scalar placeholder for the probability of
-      dropout.
+      A tuple (y, keep_prob). y is a tensor of shape (N_examples, info['num_classes']),
+      with values equal to the logits of classifying the images into one of 3 classes 
+      (airplanes, motorbikes, watch). keep_prob is a scalar placeholder for the probability
+      of dropout.
     """
     # Reshape to use within a convolutional neural net.
     # Last dimension is for "features" - there is only one here, since images are
@@ -275,6 +278,7 @@ def main():
     train_writer = tf.summary.FileWriter(graph_location)
     train_writer.add_graph(tf.get_default_graph())
 
+    # Train the deep net
     with tf.Session() as sess:
         sess.run(tf.global_variables_initializer())
         for i in range(1000):
