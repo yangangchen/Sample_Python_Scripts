@@ -17,3 +17,15 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 **Here are my sample python scripts. Python version: 3.5.**
+
+**Contents:**
+
+1. Basic python functions
+
+2. Python scripts for mathematics: ODE solvers, eigensolvers, etc
+
+3. Examples of data analysis using pandas library
+
+4. Examples of machine learning using sklearn library
+
+5. Examples of machine learning (neural network) using tensorflow library
