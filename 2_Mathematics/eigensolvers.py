@@ -19,7 +19,7 @@
 # 
 # 
 # Multiple QR factorization algorithms, eigensolvers and SVD solvers.
-# 
+
 ################################
 
 import math
