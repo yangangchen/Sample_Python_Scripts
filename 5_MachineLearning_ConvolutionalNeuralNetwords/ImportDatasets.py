@@ -1,5 +1,5 @@
 # ReadData.py
-# 
+#
 # Author: Yangang Chen, based on the TensorFlow library
 #
 # Copyright 2016 The TensorFlow Authors. All Rights Reserved.
@@ -28,8 +28,15 @@ import numpy as np
 from PIL import Image, ImageOps
 from scipy.misc import imread, imshow
 
+np.random.seed(0)
 
-def read_data(root_dir="./data", image_size=(60, 40), split_ratio=(0.65, 0.15, 0.2)):
+
+####################################################
+
+def import_datasets(root_dir="./data", image_size=(60, 40), split_ratio=(0.65, 0.15, 0.2)):
+    """Import the datasets"""
+
+    # Read the images and the labels
     all_images = []
     all_labels = []
     folder_list = os.listdir(root_dir)
@@ -62,21 +69,36 @@ def read_data(root_dir="./data", image_size=(60, 40), split_ratio=(0.65, 0.15, 0
     all_labels = all_labels_one_hot
 
     # Shuffle the dataset
-    indices = np.arange(num_examples)
-    np.random.shuffle(indices)
-    all_images = all_images[indices, :, :, :]
-    all_labels = all_labels[indices, :]
+    perm = np.arange(num_examples)
+    np.random.shuffle(perm)
+    all_images = all_images[perm]
+    all_labels = all_labels[perm]
+    # Note: these two lines are the same as
+    # all_images = all_images[perm, :, :, :]
+    # all_labels = all_labels[perm, :]
+
     # print(all_images.shape)  # (1830, 40, 60, 3)
     # print(all_labels.shape)  # (1830, 3)
 
     # Train, validation, test
-    split0 = int(num_examples * split_ratio[0]) // 50 * 50
-    split1 = int(num_examples * (split_ratio[0] + split_ratio[1])) // 50 * 50
-    train_images = all_images[:split0, :, :, :]
-    train_labels = all_labels[:split0, :]
-    validation_images = all_images[split0:split1, :, :, :]
-    validation_labels = all_labels[split0:split1, :]
-    test_images = all_images[split1:, :, :, :]
-    test_labels = all_labels[split1:, :]
+    split0 = int(num_examples * split_ratio[0])
+    split1 = int(num_examples * (split_ratio[0] + split_ratio[1]))
+    train_images = all_images[:split0]
+    train_labels = all_labels[:split0]
+    validation_images = all_images[split0:split1]
+    validation_labels = all_labels[split0:split1]
+    test_images = all_images[split1:]
+    test_labels = all_labels[split1:]
 
-    return train_images, train_labels, validation_images, validation_labels, test_images, test_labels
+    # Basic infomation
+    info = {'train_num_examples': train_labels.shape[0],
+            'validation_num_examples': validation_labels.shape[0],
+            'test_num_examples': test_labels.shape[0],
+            'height': train_images.shape[1],
+            'width': train_images.shape[2],
+            'channel': train_images.shape[3],
+            'total_pixels': train_images.shape[1] * train_images.shape[2] * train_images.shape[3],
+            'num_classes': train_labels.shape[1]}
+
+    return train_images, train_labels, validation_images, validation_labels, \
+           test_images, test_labels, info
