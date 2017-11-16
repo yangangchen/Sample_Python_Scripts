@@ -14,9 +14,9 @@ def main():
     y_test = df_test.iloc[:, -1]
 
     # Support Vector Classifier
-    model = SVC(C=0.1, kernel='rbf').fit(X_train, y_train)
+    # model = SVC(C=0.1, kernel='rbf').fit(X_train, y_train)
     # Gradient Boosting Classifier
-    # model = GradientBoostingClassifier().fit(X_train, y_train)
+    model = GradientBoostingClassifier().fit(X_train, y_train)
     y_predicted = model.predict(X_test)
     # y_predicted = clf.predict_proba(X_test)[:, 1]
 
