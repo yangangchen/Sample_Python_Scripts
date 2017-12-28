@@ -1,4 +1,4 @@
-# ODESolvers.py
+# odesolvers.py
 # 
 # Copyright (C) 2017  Yangang Chen
 # 
@@ -24,10 +24,11 @@
 ################################
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 
-class ODESolver:
+##############################
+
+class ODESolvers:
     def __init__(self, A, T):
         self.A = A.copy()  # The matrix A
         self.T = T  # The total time T
@@ -90,18 +91,3 @@ class ODESolver:
             normy[n] = np.linalg.norm(y[n + 1, :])
 
         return y, normy
-
-
-################################
-
-T = 10
-A = np.array([[-20, 10, 0, 0], [10, -20, 10, 0.], [0, 10, -20, 10], [0, 0, 10, -20]])
-y0 = np.array([1, 1, 1, 1])
-N = 400
-
-ode = ODESolver(A=A, T=T)
-# y, ny = ode.ABsolver(y0=y0, N=N)
-y, ny = ode.BDFsolver(y0=y0, N=N)
-# plt.plot(np.linspace(0, T, N + 1), ny)
-plt.semilogy(np.linspace(0, T, N + 1), ny)
-plt.show()

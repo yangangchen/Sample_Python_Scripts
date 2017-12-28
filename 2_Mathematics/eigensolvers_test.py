@@ -1,4 +1,4 @@
-# main_eigensolvers.py
+# eigensolvers_test.py
 # 
 # Copyright (C) 2017  Yangang Chen
 # 
@@ -19,7 +19,7 @@
 # 
 # 
 # Multiple QR factorization algorithms, eigensolvers and SVD solvers.
-# This main script calls "eigensolvers.py".
+# This test script calls "eigensolvers.py".
 
 ################################
 
