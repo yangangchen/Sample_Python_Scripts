@@ -24,8 +24,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 2. Python scripts for mathematics: ODE solvers, eigensolvers, etc
 
-3. Examples of data analysis using pandas library
+3. Compute the ground state of the quantum many-body system (Ising model) using Matrix-Product-State algorithm
 
-4. Examples of machine learning using sklearn library
+4. Compute the price of the European put option using the Black-Scholes model
 
-5. Examples of machine learning (neural network) using tensorflow library
+5. Examples of data analysis using pandas library
+
+6. Examples of machine learning using sklearn library
+
+7. Examples of machine learning (neural network) using tensorflow library
