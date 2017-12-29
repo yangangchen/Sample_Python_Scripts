@@ -18,6 +18,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 **Here are my sample python scripts. Python version: 3.5.**
 
+To run the code, you need to install **Python** and the following libraries: **matplotlib, numpy, scipy, PIL, pandas, bs4, sklearn, tensorflow**, etc. I suggest you to use **Anaconda** to manage the libraries.
+
 **Contents:**
 
 1. Basic python functions
