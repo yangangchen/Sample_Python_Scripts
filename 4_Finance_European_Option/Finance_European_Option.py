@@ -32,6 +32,7 @@ import matplotlib.pyplot as plt
 
 sigma = 0.4  # Volatility
 r = 0.03  # Interest rate
+mu = r  # Drift (if considering dividend)
 T = 1  # Time to expiry
 level = 4  # Higher level means the grid is finer. Lower level means the grid is coarser
 N = 25 * (2 ** (level - 1))  # Number of timesteps
@@ -42,11 +43,11 @@ K = 100  # Strike price
 def Sgrid(level):
     # Construct S, which is the non-uniform grid of the underlying asset
     # Whenever the level is increased by 1, the number of the grid nodes is doubled
-    S0 = np.hstack([np.arange(0, 0.4 * K, 0.1 * K), np.arange(0.45 * K, 0.8 * K, 0.05 * K),
-                    np.arange(0.82 * K, 0.9 * K, 0.02 * K), np.arange(0.91 * K, 1.1 * K, 0.01 * K),
-                    np.arange(1.12 * K, 1.2 * K, 0.02 * K), np.arange(1.25 * K, 1.6 * K, 0.05 * K),
-                    np.arange(1.7 * K, 2 * K, 0.1 * K), np.array([2.2 * K, 2.4 * K, 2.8 * K,
-                                                                  3.6 * K, 5 * K, 7.5 * K, 10 * K])])
+    S0 = np.hstack([np.arange(0, 0.4 * K + 1e-6, 0.1 * K), np.arange(0.45 * K, 0.8 * K + 1e-6, 0.05 * K),
+                    np.arange(0.82 * K, 0.9 * K + 1e-6, 0.02 * K), np.arange(0.91 * K, 1.1 * K + 1e-6, 0.01 * K),
+                    np.arange(1.12 * K, 1.2 * K + 1e-6, 0.02 * K), np.arange(1.25 * K, 1.6 * K + 1e-6, 0.05 * K),
+                    np.arange(1.7 * K, 2 * K + 1e-6, 0.1 * K), np.array([2.2 * K, 2.4 * K, 2.8 * K,
+                                                                         3.6 * K, 5 * K, 7.5 * K, 10 * K])])
     S = S0.copy()
     for l in range(1, level):
         S = np.vstack([S, np.hstack([1 / 2 * (S[:-1] + S[1:]), 0])]).transpose().ravel()[:-1]
@@ -61,8 +62,8 @@ def BlackScholesMatrix(S):
     for j in range(1, J - 1):
         a = sigma ** 2 * S[j] ** 2 / ((S[j] - S[j - 1]) * (S[j + 1] - S[j - 1]))
         b = sigma ** 2 * S[j] ** 2 / ((S[j + 1] - S[j]) * (S[j + 1] - S[j - 1]))
-        p = r * S[j] / (S[j + 1] - S[j - 1])
-        pp = r * S[j] / (S[j + 1] - S[j])
+        p = mu * S[j] / (S[j + 1] - S[j - 1])
+        pp = mu * S[j] / (S[j + 1] - S[j])
         if a - p >= 0:  # Central differencing
             A[j, j] = r + a + b
             A[j, j - 1] = -(a - p)
