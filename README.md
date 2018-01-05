@@ -32,6 +32,8 @@ To run the code, you need to install **Python** and the following libraries: **m
 
 5. Examples of data analysis using pandas library
 
-6. Examples of machine learning using sklearn library
+6. My implementation of deep neural networks
 
-7. Examples of machine learning (neural network) using tensorflow library
+7. Examples of machine learning using sklearn library
+
+8. Examples of machine learning (neural network) using tensorflow library
