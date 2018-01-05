@@ -19,7 +19,7 @@
 #
 #
 # Compute the price of the European put option by solving the Black-Scholes equation
-#     du/dt + 1 / 2 * sigma * S ** 2 * d^2u/dx^2 + r S du/dS - r u = 0
+#     du/dt + 1 / 2 * sigma * S ** 2 * d^2u/dx^2 + mu S du/dS - r u = 0
 
 ################################
 
