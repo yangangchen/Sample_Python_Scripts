@@ -49,6 +49,9 @@ class NeuralNetwork:
             y = 1 / (1 + np.exp(-z))
         elif activation == 'tanh':
             y = np.tanh(z)
+        elif activation == 'softmax':
+            y = np.exp(z)
+            y = y / y.sum(axis=0)
         elif activation == "relu":
             y = np.maximum(z, 0)
         else:
@@ -72,6 +75,10 @@ class NeuralNetwork:
         elif activation == 'tanh':
             y = np.tanh(z)
             dz = dy * (1 - y ** 2)
+        elif activation == 'softmax':
+            y = np.exp(z)
+            y = y / y.sum(axis=0)
+            dz = dy * y * (1 - y)
         elif activation == "relu":
             dz = dy * (z > 0)
         else:
