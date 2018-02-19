@@ -63,7 +63,7 @@ class NeuralNetwork:
         return y
 
     def backward_onelayer(self, dy, layer):
-        N = dy.shape[1]
+        M = dy.shape[1]
         z = self.cache['z' + str(layer)]
         activation = self.activation_layers[layer]
         if activation == "sigmoid":
@@ -78,8 +78,8 @@ class NeuralNetwork:
             dz = dy.copy()
 
         x = self.cache['x' + str(layer - 1)]
-        dW = 1 / N * dz.dot(x.transpose())
-        db = 1 / N * np.sum(dz, axis=1, keepdims=True)
+        dW = 1 / M * dz.dot(x.transpose())
+        db = 1 / M * np.sum(dz, axis=1, keepdims=True)
         self.grads['dW' + str(layer)] = dW
         self.grads['db' + str(layer)] = db
 
