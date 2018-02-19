@@ -47,6 +47,8 @@ class NeuralNetwork:
         activation = self.activation_layers[layer]
         if activation == "sigmoid":
             y = 1 / (1 + np.exp(-z))
+        elif activation == 'tanh':
+            y = np.tanh(z)
         elif activation == "relu":
             y = np.maximum(z, 0)
         else:
@@ -67,6 +69,9 @@ class NeuralNetwork:
         if activation == "sigmoid":
             y = 1 / (1 + np.exp(-z))
             dz = dy * y * (1 - y)
+        elif activation == 'tanh':
+            y = np.tanh(z)
+            dz = dy * (1 - y ** 2)
         elif activation == "relu":
             dz = dy * (z > 0)
         else:
