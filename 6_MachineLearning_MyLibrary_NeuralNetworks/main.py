@@ -1,8 +1,6 @@
 # main.py
 #
-# Author: Yangang Chen, based on the TensorFlow library
-#
-# Copyright 2015 The TensorFlow Authors. All Rights Reserved.
+# Author: Yangang Chen
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -50,10 +48,10 @@ def load_data():
 
 def main():
     train_x, train_y, test_x, test_y, classes = load_data()
-    # print(train_x.shape)
-    # print(train_y.shape)
-    # print(test_x.shape)
-    # print(test_y.shape)
+    # print(train_x.shape)  # (12288, 209)
+    # print(train_y.shape)  # (1, 209)
+    # print(test_x.shape)  # (12288, 50)
+    # print(test_y.shape)  # (1, 50)
 
     # NN = NeuralNetwork([12288, 20, 1], [None, 'relu', 'sigmoid'])
     NN = NeuralNetwork([12288, 20, 7, 5, 1], [None, 'relu', 'relu', 'relu', 'sigmoid'])

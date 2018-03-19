@@ -34,6 +34,8 @@ To run the code, you need to install **Python** and the following libraries: **m
 
 6. My implementation of deep neural networks
 
-7. Examples of machine learning using sklearn library
+7. My implementation of recurrent neural networks
 
-8. Examples of machine learning (neural network) using tensorflow library
+8. Examples of machine learning using sklearn library
+
+9. Examples of machine learning (neural network) using tensorflow library
