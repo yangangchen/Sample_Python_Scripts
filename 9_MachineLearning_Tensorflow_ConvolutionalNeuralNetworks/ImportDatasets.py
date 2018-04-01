@@ -83,11 +83,11 @@ def import_datasets(root_dir="./data", image_size=(60, 40), split_ratio=(0.65, 0
     # Train, validation, test
     split0 = int(num_examples * split_ratio[0])
     split1 = int(num_examples * (split_ratio[0] + split_ratio[1]))
-    train_images = all_images[:split0]
+    train_images = all_images[:split0] / 255.0
     train_labels = all_labels[:split0]
-    validation_images = all_images[split0:split1]
+    validation_images = all_images[split0:split1] / 255.0
     validation_labels = all_labels[split0:split1]
-    test_images = all_images[split1:]
+    test_images = all_images[split1:] / 255.0
     test_labels = all_labels[split1:]
 
     # Basic infomation

@@ -1,0 +1,32 @@
+0: watch
+1: motorbikes
+2: airplanes
+
+
+0 steps
+=======
+Step 0, training accuracy 0.24
+Test accuracy 0.286885
+
+
+100 steps
+=========
+Step 0, training accuracy 0.24
+Step 100, training accuracy 0.96
+Test accuracy 0.89071
+
+
+1000 steps
+==========
+Step 0, training accuracy 0.24
+Step 100, training accuracy 0.96
+Step 200, training accuracy 0.98
+Step 300, training accuracy 0.96
+Step 400, training accuracy 0.98
+Step 500, training accuracy 1
+Step 600, training accuracy 1
+Step 700, training accuracy 1
+Step 800, training accuracy 1
+Step 900, training accuracy 1
+Step 1000, training accuracy 1
+Test accuracy 0.967213
