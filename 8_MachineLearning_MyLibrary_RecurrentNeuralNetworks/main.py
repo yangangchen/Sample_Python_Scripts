@@ -31,52 +31,35 @@ def generate_data():
     dim_x = 15
     dim_a = 30
     np.random.seed(1)
-    NN = NeuralNetwork(T, [dim_x, dim_a, 1], [None, 'tanh', 'sigmoid'])
-    # print("W1: ")
-    # print(NN.parameters["W1"])
-    print("W2: ")
-    print(NN.parameters["W2"])
-    # print("b1: ")
-    # print(NN.parameters["b1"])
-    # print("b2: ")
-    # print(NN.parameters["b2"])
-    train_x = np.random.randn(dim_x, M, T)
+    NN = NeuralNetwork(learning_task='classification-two-classes', T=T, dim_layers=[dim_x, dim_a, 1])
+    train_x = np.random.randn(M, dim_x, T)
     train_y = NN.predict(train_x)
-    test_x = np.random.randn(dim_x, M // 4, T)
+    test_x = np.random.randn(M // 4, dim_x, T)
     test_y = NN.predict(test_x)
+    np.random.seed(100)  # Changed!
     return train_x, train_y, test_x, test_y
 
 
 def main():
     train_x, train_y, test_x, test_y = generate_data()
-    # print(train_x.shape)  # (5, 1000, 10)
-    # print(train_y.shape)  # (1, 1000, 10)
-    # print(test_x.shape)  # (5, 250, 10)
-    # print(test_y.shape)  # (1, 250, 10)
+    # print(train_x.shape)  # (2000, 15, 20)
+    # print(train_y.shape)  # (2000, 1, 20)
+    # print(test_x.shape)  # (500, 15, 20)
+    # print(test_y.shape)  # (500, 1, 20)
 
     T = 20
     dim_x = 15
     dim_a = 20  # Changed!
-    np.random.seed(100)  # Changed!
-    NN = NeuralNetwork(T, [dim_x, dim_a, 1], [None, 'tanh', 'sigmoid'])
+    NN = NeuralNetwork(learning_task='classification-two-classes', T=T, dim_layers=[dim_x, dim_a, 1])
 
     score = NN.evaluate_accuracy(train_x, train_y)
-    print("Training accuracy is: " + str(score))
-
-    # print("W1: ")
-    # print(NN.parameters["W1"])
-    print("W2: ")
-    print(NN.parameters["W2"])
-    # print("b1: ")
-    # print(NN.parameters["b1"])
-    # print("b2: ")
-    # print(NN.parameters["b2"])
+    print("Training accuracy (before training) is: " + str(score))
 
     step_array = []
     loss_array = []
 
     for step in range(3000 + 1):
-        loss = NN.train_onestep(train_x, train_y, 0.0075)
+        loss = NN.train_onestep(train_x, train_y, 0.01)
 
         if step % 100 == 0:
             print("step: " + str(step) + ", loss: " + str(loss))
@@ -95,19 +78,10 @@ def main():
     plt.close(fig)
 
     score = NN.evaluate_accuracy(train_x, train_y)
-    print("Training accuracy is: " + str(score))
+    print("Training accuracy (after training) is: " + str(score))
 
     score = NN.evaluate_accuracy(test_x, test_y)
     print("Test accuracy is: " + str(score))
-
-    # print("W1: ")
-    # print(NN.parameters["W1"])
-    print("W2: ")
-    print(NN.parameters["W2"])
-    # print("b1: ")
-    # print(NN.parameters["b1"])
-    # print("b2: ")
-    # print(NN.parameters["b2"])
 
 
 if __name__ == '__main__':

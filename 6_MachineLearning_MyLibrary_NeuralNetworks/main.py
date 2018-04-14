@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # 
-# Implementation of deep neural networks.
+# Implementation of feed forward deep neural networks.
 # ==============================================================================
 
 import numpy as np
@@ -37,30 +37,32 @@ def load_data():
 
     classes = np.array(test_dataset["list_classes"][:])  # the list of classes
 
-    train_y = train_y.reshape((1, train_y.shape[0]))
-    test_y = test_y.reshape((1, test_y.shape[0]))
-
-    train_x = train_x.reshape(train_x.shape[0], -1).transpose() / 255.
-    test_x = test_x.reshape(test_x.shape[0], -1).transpose() / 255.
+    train_x = train_x.reshape((train_x.shape[0], -1)) / 255.
+    test_x = test_x.reshape((test_x.shape[0], -1)) / 255.
+    train_y = np.expand_dims(train_y, axis=1)
+    test_y = np.expand_dims(test_y, axis=1)
 
     return train_x, train_y, test_x, test_y, classes
 
 
 def main():
     train_x, train_y, test_x, test_y, classes = load_data()
-    # print(train_x.shape)  # (12288, 209)
-    # print(train_y.shape)  # (1, 209)
-    # print(test_x.shape)  # (12288, 50)
-    # print(test_y.shape)  # (1, 50)
+    # print(train_x.shape)  # (209, 12288)
+    # print(train_y.shape)  # (209, 1)
+    # print(test_x.shape)  # (50, 12288)
+    # print(test_y.shape)  # (50, 1)
 
-    # NN = NeuralNetwork([12288, 20, 1], [None, 'relu', 'sigmoid'])
-    NN = NeuralNetwork([12288, 20, 7, 5, 1], [None, 'relu', 'relu', 'relu', 'sigmoid'])
+    NN = NeuralNetwork(learning_task='classification-two-classes',
+                       dim_layers=[12288, 20, 7, 5, 1])
+
+    score = NN.evaluate_accuracy(train_x, train_y)
+    print("Training accuracy (before training) is: " + str(score))
 
     step_array = []
     loss_array = []
 
     for step in range(3000 + 1):
-        loss = NN.train_onestep(train_x, train_y, 0.0075)
+        loss = NN.train_onestep(train_x, train_y, 0.01)
 
         if step % 100 == 0:
             print("step: " + str(step) + ", loss: " + str(loss))
@@ -77,6 +79,9 @@ def main():
     plt.show()
     fig.savefig('training_loss.png', bbox_inches='tight')
     plt.close(fig)
+
+    score = NN.evaluate_accuracy(train_x, train_y)
+    print("Training accuracy (after training) is: " + str(score))
 
     score = NN.evaluate_accuracy(test_x, test_y)
     print("Test accuracy is: " + str(score))
