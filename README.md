@@ -16,9 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-**Here are my sample python scripts. Python version: 3.5.**
-
-To run the code, you need to install **Python** and the following libraries: **matplotlib, numpy, scipy, PIL, pandas, bs4, sklearn, tensorflow**, etc. I suggest you to use **Anaconda** to manage the libraries.
+**Author: Yangang Chen. My sample python scripts. Python version: 3.5.**
 
 **Contents:**
 
@@ -32,12 +30,6 @@ To run the code, you need to install **Python** and the following libraries: **m
 
 5. Examples of data analysis using pandas library
 
-6. My own implementation of feed forward deep neural networks
+**Requirements:**
 
-7. My own implementation of convolutional neural networks
-
-8. My own implementation of recurrent neural networks
-
-9. Examples of machine learning using sklearn library
-
-10. Examples of machine learning (neural network) using tensorflow library
+To run the code, you need to install **Python** and the following libraries: **matplotlib, numpy, scipy, PIL, pandas, bs4, sklearn, tensorflow**, etc. I suggest you to use **Anaconda** to manage the libraries.
